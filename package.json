@@ -21,6 +21,13 @@
   },
   "homepage": "https://github.com/asdx278/frontend-project-46#readme",
   "dependencies": {
-    "commander": "^11.0.0"
+    "commander": "^11.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "eslint": "^8.47.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.0"
   }
 }
