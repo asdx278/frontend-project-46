@@ -29,7 +29,9 @@ export default (file1, file2) => {
   });
   const sortedDiff = _.sortBy(allDiff, ['key']);
 
-  const treeDiff = sortedDiff.map(({ key, value, state, oldValue }) => {
+  const treeDiff = sortedDiff.map(({
+    key, value, state, oldValue,
+  }) => {
     switch (state) {
       case 'added':
         return ` + ${key}: ${value}`;
@@ -42,6 +44,7 @@ export default (file1, file2) => {
       default:
         break;
     }
+    return treeDiff;
   });
 
   return `{\n${treeDiff.join('\n')}\n}`;
