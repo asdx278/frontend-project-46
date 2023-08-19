@@ -9,9 +9,9 @@ program
   .argument('<filepath2>', 'path to second file')
   .description('Compares two configuration files and shows a difference.')
   .option('-V, --version', 'output the version number')
-  .option('-f, --format <type>', 'output format', '')
-  .action((filepath1, filepath2) => {
-    const result = genDiff(filepath1, filepath2);
+  .option('-f, --format <type>', 'output format', 'stylish')
+  .action((filepath1, filepath2, option) => {
+    const result = genDiff(filepath1, filepath2, option.format);
     console.log(result);
   });
 
