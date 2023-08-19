@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { test, expect } from '@jest/globals';
 import genDiff from '../src/index';
 import stylishTree from '../src/formatters/stylish.js';
+import plainTree from '../src/formatters/plain';
 import makeBeautiful from '../src/formatters/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -12,6 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 const expectFile = readFileSync(getFixturePath('expectFile.txt'), 'utf-8');
 const expectNestedFile = readFileSync(getFixturePath('expectNestedFile.txt'), 'utf-8');
+const expectPlainFile = readFileSync(getFixturePath('expectPlainFile.txt'), 'utf-8');
 
 test('test genDiff json stylish', () => {
   const file1 = getFixturePath('json-test-file-1.json');
@@ -37,7 +39,7 @@ test('test genDiff without extension', () => {
   expect(genDiff(file1, file2, 'stylish')).toBe(expectFile);
 });
 
-test('test genDiff nested', () => {
+test('test genDiff nested stylish', () => {
   const file1 = getFixturePath('json-nested-test-file-1.json');
   const file2 = getFixturePath('json-nested-test-file-2.json');
   expect(genDiff(file1, file2, 'stylish')).toBe(expectNestedFile);
@@ -66,4 +68,16 @@ test('test makeBeautiful unsupported format', () => {
     makeBeautiful(tree, 'excel');
   }
   expect(makeBeautifulError).toThrow(new Error('Unsupported format'));
+});
+test('test genDiff nested plain', () => {
+  const file1 = getFixturePath('json-nested-test-file-1.json');
+  const file2 = getFixturePath('json-nested-test-file-2.json');
+  expect(genDiff(file1, file2, 'plain')).toBe(expectPlainFile);
+});
+test('test plainTree unknown state', () => {
+  const tree = [{ key: 'follow', value: false, state: 'delet' }, { key: 'host', value: 'hexlet.io', state: 'unchanged' }];
+  function plainTreeError() {
+    plainTree(tree);
+  }
+  expect(plainTreeError).toThrow(new Error('Unknown state'));
 });
