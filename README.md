@@ -22,7 +22,33 @@ make install
 gendiff file1.json file2.json --format stylish
 ```
 
-[![asciicast](https://asciinema.org/a/H4STFG4k2644HRcyFJB6NyZey.svg)](https://asciinema.org/a/H4STFG4k2644HRcyFJB6NyZey)
+```shell
+Usage: gendiff [options] <filepath1> <filepath2>
+
+Compares two configuration files and shows a difference.
+
+Arguments:
+  filepath1            path to first file
+  filepath2            path to second file
+
+Options:
+  -V, --version        output the version number
+  -f, --format <type>  output format (default: "stylish")
+  -h, --help           display help for command
+```
+
+## Stylish
+
+[![asciicast](https://asciinema.org/a/603713.svg)](https://asciinema.org/a/603713)
+
+## Plain
+
+[![asciicast](https://asciinema.org/a/8w99LI5UDS8xDyjDaGpyoo86Q.svg)](https://asciinema.org/a/8w99LI5UDS8xDyjDaGpyoo86Q)
+
+## JSON
+
+[![asciicast](https://asciinema.org/a/qKr0uN1QWaBa55gPWO6Q7HYSu.svg)](https://asciinema.org/a/qKr0uN1QWaBa55gPWO6Q7HYSu)
+
 ---
 email: <albert.shubin@gmail.com>
 hexlet: <https://ru.hexlet.io/u/asdx278>
