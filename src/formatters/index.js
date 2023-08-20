@@ -7,6 +7,8 @@ const makeBeautiful = (tree, formatter) => {
       return plainTree(tree);
     case 'stylish':
       return stylishTree(tree);
+    case 'json':
+      return JSON.stringify(tree);
     default:
       throw new Error('Unsupported format');
   }
