@@ -14,6 +14,7 @@ const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filen
 const expectFile = readFileSync(getFixturePath('expectFile.txt'), 'utf-8');
 const expectNestedFile = readFileSync(getFixturePath('expectNestedFile.txt'), 'utf-8');
 const expectPlainFile = readFileSync(getFixturePath('expectPlainFile.txt'), 'utf-8');
+const expectJson = readFileSync(getFixturePath('expectJSON.txt'), 'utf-8');
 
 test('test genDiff json stylish', () => {
   const file1 = getFixturePath('json-test-file-1.json');
@@ -69,15 +70,23 @@ test('test makeBeautiful unsupported format', () => {
   }
   expect(makeBeautifulError).toThrow(new Error('Unsupported format'));
 });
+
 test('test genDiff nested plain', () => {
   const file1 = getFixturePath('json-nested-test-file-1.json');
   const file2 = getFixturePath('json-nested-test-file-2.json');
   expect(genDiff(file1, file2, 'plain')).toBe(expectPlainFile);
 });
+
 test('test plainTree unknown state', () => {
   const tree = [{ key: 'follow', value: false, state: 'delet' }, { key: 'host', value: 'hexlet.io', state: 'unchanged' }];
   function plainTreeError() {
     plainTree(tree);
   }
   expect(plainTreeError).toThrow(new Error('Unknown state'));
+});
+
+test('test genDiff nested json', () => {
+  const file1 = getFixturePath('json-nested-test-file-1.json');
+  const file2 = getFixturePath('json-nested-test-file-2.json');
+  expect(genDiff(file1, file2, 'json')).toBe(expectJson);
 });
