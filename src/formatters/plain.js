@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
 const stringify = (data) => {
-  if (typeof data === 'boolean' || data === null) {
+  if (typeof data === 'boolean' || typeof data === 'number' || data === null) {
     return `${data}`;
   }
-  if (!(_.isObject(data))) {
+  if (!(_.isObject(data)) || typeof data === 'string') {
     return `'${data}'`;
   }
   return '[complex value]';
