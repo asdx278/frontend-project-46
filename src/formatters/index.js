@@ -10,7 +10,7 @@ const makeBeautiful = (tree, formatter) => {
     case 'json':
       return JSON.stringify(tree);
     default:
-      throw new Error('Unsupported format');
+      throw new Error(`${formatter} format is not supported`);
   }
 };
 

@@ -12,7 +12,7 @@ export default (filepath1, filepath2, format = 'stylish') => {
   };
 
   const getExtension = (filepath) => {
-    const fileExtension = extname(filepath);
+    const fileExtension = extname(filepath).slice(1);
     return fileExtension;
   };
 

@@ -27,7 +27,7 @@ const plainTree = (tree) => {
         case 'nested':
           return `${iter(children, `${ancestry}${key}.`)}`;
         default:
-          throw new Error('Unknown state');
+          throw new Error(`${state} unknown state`);
       }
     });
     return [...result].join('\n');
