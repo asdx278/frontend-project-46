@@ -12,22 +12,20 @@ const stringify = (data) => {
 
 const plainTree = (tree) => {
   const iter = (node, ancestry = '') => {
-    const result = node.flatMap(({
-      key, value, state, oldValue, children,
-    }) => {
-      switch (state) {
+    const result = node.flatMap((element) => {
+      switch (element.state) {
         case 'added':
-          return `Property '${ancestry}${key}' was added with value: ${stringify(value)}`;
+          return `Property '${ancestry}${element.key}' was added with value: ${stringify(element.value)}`;
         case 'deleted':
-          return `Property '${ancestry}${key}' was removed`;
+          return `Property '${ancestry}${element.key}' was removed`;
         case 'changed':
-          return `Property '${ancestry}${key}' was updated. From ${stringify(oldValue)} to ${stringify(value)}`;
+          return `Property '${ancestry}${element.key}' was updated. From ${stringify(element.oldValue)} to ${stringify(element.value)}`;
         case 'unchanged':
           return [];
         case 'nested':
-          return `${iter(children, `${ancestry}${key}.`)}`;
+          return `${iter(element.children, `${ancestry}${element.key}.`)}`;
         default:
-          throw new Error(`${state} unknown state`);
+          throw new Error(`${element.state} unknown state`);
       }
     });
     return [...result].join('\n');

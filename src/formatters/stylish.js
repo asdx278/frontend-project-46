@@ -14,22 +14,20 @@ const stringify = (data, depth = 1) => {
 };
 const stylishTree = (tree) => {
   const iter = (node, depth = 1) => {
-    const result = node.map(({
-      key, value, state, oldValue, children,
-    }) => {
-      switch (state) {
+    const result = node.map((element) => {
+      switch (element.state) {
         case 'added':
-          return `${getIndent(depth)}+ ${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}+ ${element.key}: ${stringify(element.value, depth)}`;
         case 'deleted':
-          return `${getIndent(depth)}- ${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}- ${element.key}: ${stringify(element.value, depth)}`;
         case 'changed':
-          return `${getIndent(depth)}- ${key}: ${stringify(oldValue, depth)}\n${getIndent(depth)}+ ${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}- ${element.key}: ${stringify(element.oldValue, depth)}\n${getIndent(depth)}+ ${element.key}: ${stringify(element.value, depth)}`;
         case 'unchanged':
-          return `${getIndent(depth)}  ${key}: ${stringify(value, depth)}`;
+          return `${getIndent(depth)}  ${element.key}: ${stringify(element.value, depth)}`;
         case 'nested':
-          return `${getIndent(depth)}  ${key}: {\n${iter(children, depth + 1)}\n${getIndent(depth)}  }`;
+          return `${getIndent(depth)}  ${element.key}: {\n${iter(element.children, depth + 1)}\n${getIndent(depth)}  }`;
         default:
-          throw new Error(`${state} unknown state`);
+          throw new Error(`${element.state} unknown state`);
       }
     });
     return [...result].join('\n');
